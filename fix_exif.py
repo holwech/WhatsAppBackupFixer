@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import piexif
 
-folder = 'test_images/'
+folder = ''
 
 def get_date(filename):
     date_str = filename.split('-')[1]
