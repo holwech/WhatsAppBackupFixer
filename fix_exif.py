@@ -19,8 +19,8 @@ allowedFileEndings = ['mp4','jpg','3gp','jpeg']
 
 filenames = [fn for fn in os.listdir(folder) if fn.split('.')[-1] in allowedFileEndings]
 
-l = len(filenames)
-print(l)
+num_files = len(filenames)
+print("Number of files: {}".format(num_files))
 
 for i, filename in enumerate(filenames):
 
@@ -34,5 +34,7 @@ for i, filename in enumerate(filenames):
         exif_bytes = piexif.dump(exif_dict)
         piexif.insert(exif_bytes, folder + filename)
 
-    print('{}: {}/{}'.format(filename, i + 1, l))
+    num_digits = len(str(num_files))
+    print("{num:{width}}/{max} - {filename}"
+            .format(num=i+1, width=num_digits, max=num_files, filename=folder+filename))
 print('\nDone!')
