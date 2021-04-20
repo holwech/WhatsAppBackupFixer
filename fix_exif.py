@@ -1,6 +1,7 @@
 from datetime import datetime
 import piexif
 
+import re
 import os
 import time
 
@@ -14,10 +15,9 @@ def get_date(filename):
     date_str = filename.split('-')[1]
     return datetime.strptime(date_str, '%Y%m%d').strftime("%Y:%m:%d %H:%M:%S")
 
+fn_regex = re.compile(r'(IMG|VID)-(\d{8})-WA.*\.(jpe?g|mp4|3gp)')
 
-allowedFileEndings = ['mp4','jpg','3gp','jpeg']
-
-filenames = [fn for fn in os.listdir(folder) if fn.split('.')[-1] in allowedFileEndings]
+filenames = [fn for fn in os.listdir(folder) if re.match(fn_regex, fn)]
 
 num_files = len(filenames)
 print("Number of files: {}".format(num_files))
